@@ -132,8 +132,14 @@ namespace grupo3.prototipos.CAI.Models
 
         public void ReducirStock()
         {
-            ModuloProductos.ReducirStockVuelos();
-            ModuloProductos.ReducirStockHoteles();
+            if (ModuloItinerario.itinerarioSeleccionado.CodigosVuelosAgregados != null)
+            {
+                ModuloProductos.ReducirStockVuelos();
+            }
+            if (ModuloItinerario.itinerarioSeleccionado.CodigosHotelesAgregados != null)
+            {
+                ModuloProductos.ReducirStockHoteles();
+            }
         }
     }
 }

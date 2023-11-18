@@ -105,6 +105,7 @@ namespace grupo3.prototipos.CAI.Módulos
         public static void GuardarPasajero(Pasajero pasajero)
         {
             pasajeros.Add(pasajero);
+            
             itinerarioSeleccionado.Pasajeros = pasajeros;
         }
 
@@ -132,7 +133,8 @@ namespace grupo3.prototipos.CAI.Módulos
         {
             itinerarioSeleccionado = null;
             codigosTarifasVuelosAgregados = null;
-            codigosHabitacionesHotelesAgregados = null;
+            codigosHabitacionesHotelesAgregados = null; 
+            pasajeros = new List<Pasajero>();
         }
 
         public static ItinerarioEnt BuscarItinerario(string numeroItinerario)
@@ -158,7 +160,7 @@ namespace grupo3.prototipos.CAI.Módulos
 
             string error = "";
 
-            //mas adultos que inf en cada vuelo.
+            //mas adultos que inf en cada vuelo
 
             //lista de vuelos del itinerario
             Dictionary<VueloEnt, List<Pasajero>> vuelosItinerario = new();
@@ -170,7 +172,7 @@ namespace grupo3.prototipos.CAI.Módulos
                 {
                     vuelosItinerario.Add(vuelo, new List<Pasajero>());
 
-                    if (pasajeros.Count > 0)
+                    if (pasajeros != null)
                     {
                         foreach (var pasajero in pasajeros)
                         {
@@ -230,17 +232,20 @@ namespace grupo3.prototipos.CAI.Módulos
             }
 
             Dictionary<string, int> pasajerosPorTarifa = new();
-            foreach (var pasajero in pasajeros)
+            if (pasajeros != null)
             {
-                if (pasajero.TipoDeProducto == "Vuelo")
+                foreach (var pasajero in pasajeros)
                 {
-                    if (pasajerosPorTarifa.ContainsKey(pasajero.CodigoProducto))
+                    if (pasajero.TipoDeProducto == "Vuelo")
                     {
-                        pasajerosPorTarifa[pasajero.CodigoProducto]++;
-                    }
-                    else
-                    {
-                        pasajerosPorTarifa.Add(pasajero.CodigoProducto, 1);
+                        if (pasajerosPorTarifa.ContainsKey(pasajero.CodigoProducto))
+                        {
+                            pasajerosPorTarifa[pasajero.CodigoProducto]++;
+                        }
+                        else
+                        {
+                            pasajerosPorTarifa.Add(pasajero.CodigoProducto, 1);
+                        }
                     }
                 }
             }
@@ -283,96 +288,105 @@ namespace grupo3.prototipos.CAI.Módulos
 
             StringBuilder error = new StringBuilder();
 
-            foreach (var pasajero in pasajeros)
+            if (pasajeros != null)
             {
-                if (pasajero.TipoDeProducto == "Hotel")
+                foreach (var pasajero in pasajeros)
                 {
-                    var ok = false;
-                    foreach (var codigoHabitacion in codigosHabitacionesHotelesAgregados)
+                    if (pasajero.TipoDeProducto == "Hotel")
                     {
-                        if (codigoHabitacion == pasajero.CodigoProducto)
+                        var ok = false;
+                        foreach (var codigoHabitacion in codigosHabitacionesHotelesAgregados)
                         {
-                            ok = true;
-                            break;
+                            if (codigoHabitacion == pasajero.CodigoProducto)
+                            {
+                                ok = true;
+                                break;
+                            }
                         }
-                    }
 
-                    if (!ok)
-                    {
-                        error.AppendLine($"{pasajero.Apellido}, {pasajero.Nombre} está asignado al producto {pasajero.CodigoProducto}, que no se encuentra incluido en el itinerario");
+                        if (!ok)
+                        {
+                            error.AppendLine($"{pasajero.Apellido}, {pasajero.Nombre} está asignado al producto {pasajero.CodigoProducto}, que no se encuentra incluido en el itinerario");
+                        }
                     }
                 }
             }
 
-            foreach (var codigoHabitacion in codigosHabitacionesHotelesAgregados)
+            if (codigosHabitacionesHotelesAgregados != null)
             {
-                int adultos = 0;
-                int men = 0;
-                int inf = 0;
-
-                foreach (var pasajero in pasajeros)
+                foreach (var codigoHabitacion in codigosHabitacionesHotelesAgregados)
                 {
-                    if (pasajero.CodigoProducto == codigoHabitacion)
+                    int adultos = 0;
+                    int men = 0;
+                    int inf = 0;
+
+                    if (pasajeros != null)
                     {
-                        if (pasajero.Edad >= 18)
+                        foreach (var pasajero in pasajeros)
                         {
-                            adultos++;
-                        }
-                        else if (pasajero.Edad >= 2)
-                        {
-                            men++;
-                        }
-                        else
-                        {
-                            inf++;
+                            if (pasajero.CodigoProducto == codigoHabitacion)
+                            {
+                                if (pasajero.Edad >= 18)
+                                {
+                                    adultos++;
+                                }
+                                else if (pasajero.Edad >= 2)
+                                {
+                                    men++;
+                                }
+                                else
+                                {
+                                    inf++;
+                                }
+                            }
                         }
                     }
-                }
 
-                if (adultos == 0)
-                {
-                    error.AppendLine($"La habitación {codigoHabitacion} no tiene adultos asignados.");
-                }
-
-                HotelEnt hotel = ModuloProductos.CargarHotel(codigoHabitacion);
-                DisponibilidadHotel? habitacion = null;
-
-                foreach (var tipoHabitacion in hotel.DisponibilidadHotel)
-                {
-                    foreach (var fechaHabitacion in tipoHabitacion.HabitacionesDisp)
+                    if (adultos == 0)
                     {
-                        if (fechaHabitacion.CodigoHabitacion == codigoHabitacion)
+                        error.AppendLine($"La habitación {codigoHabitacion} no tiene adultos asignados.");
+                    }
+
+                    HotelEnt hotel = ModuloProductos.CargarHotel(codigoHabitacion);
+                    DisponibilidadHotel? habitacion = null;
+
+                    foreach (var tipoHabitacion in hotel.DisponibilidadHotel)
+                    {
+                        foreach (var fechaHabitacion in tipoHabitacion.HabitacionesDisp)
                         {
-                            habitacion = tipoHabitacion;
+                            if (fechaHabitacion.CodigoHabitacion == codigoHabitacion)
+                            {
+                                habitacion = tipoHabitacion;
+                                break;
+                            }
+                        }
+
+                        if (habitacion != null)
+                        {
                             break;
                         }
                     }
 
-                    if (habitacion != null)
+                    if (habitacion == null)
                     {
-                        break;
+                        error.AppendLine($"No se encuentra el codigo de producto (hotel) {codigoHabitacion}, ya asignado a un itinerario y a pasajeros.");
                     }
-                }
-
-                if (habitacion == null)
-                {
-                    error.AppendLine($"No se encuentra el codigo de producto (hotel) {codigoHabitacion}, ya asignado a un itinerario y a pasajeros.");
-                }
-                else
-                {
-                    if (adultos > habitacion.MaximoAdultosHabitacion)
+                    else
                     {
-                        error.AppendLine($"Se ha superado la cantidad máxima de adultos ({habitacion.MaximoAdultosHabitacion}) para el producto {codigoHabitacion}");
-                    }
+                        if (adultos > habitacion.MaximoAdultosHabitacion)
+                        {
+                            error.AppendLine($"Se ha superado la cantidad máxima de adultos ({habitacion.MaximoAdultosHabitacion}) para el producto {codigoHabitacion}");
+                        }
 
-                    if (men > habitacion.MaximoMenoresHabitacion)
-                    {
-                        error.AppendLine($"Se ha superado la cantidad máxima de menores ({habitacion.MaximoMenoresHabitacion}) para el producto {codigoHabitacion}");
-                    }
+                        if (men > habitacion.MaximoMenoresHabitacion)
+                        {
+                            error.AppendLine($"Se ha superado la cantidad máxima de menores ({habitacion.MaximoMenoresHabitacion}) para el producto {codigoHabitacion}");
+                        }
 
-                    if (inf > habitacion.MaximoInfantesHabitacion)
-                    {
-                        error.AppendLine($"Se ha superado la cantidad máxima de infantes ({habitacion.MaximoInfantesHabitacion}) para el producto {codigoHabitacion}");
+                        if (inf > habitacion.MaximoInfantesHabitacion)
+                        {
+                            error.AppendLine($"Se ha superado la cantidad máxima de infantes ({habitacion.MaximoInfantesHabitacion}) para el producto {codigoHabitacion}");
+                        }
                     }
                 }
             }
