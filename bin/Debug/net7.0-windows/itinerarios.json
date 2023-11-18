@@ -1,0 +1,132 @@
+[
+    {
+        "NumeroItinerario": "66339842",
+        "FechaCreacionItinerario": "2023-11-08T21:07:04.8649156-03:00",
+        "CodigosVuelosAgregados": [],
+        "CodigosHotelesAgregados": [
+            "PRS-Especial-1"
+        ],
+        "Pasajeros": [
+            {
+                "Nombre": "Lucas",
+                "Apellido": "Esteve",
+                "Dni": 42900878,
+                "FechaNacimiento": "2000-11-16T00:00:00",
+                "TipoDeProducto": "Hotel",
+                "CodigoProducto": "PRS-Especial-1",
+                "Edad": 23
+            }
+        ],
+        "Cotizacion": 120,
+        "Estado": "Pre-reserva",
+        "Pago": true
+    },
+    {
+        "NumeroItinerario": "11367433",
+        "FechaCreacionItinerario": "2023-11-13T22:46:56.5682335-03:00",
+        "CodigosVuelosAgregados": [],
+        "CodigosHotelesAgregados": [
+            "PRS-Especial-1",
+            "PRS-Especial-1"
+        ],
+        "Pasajeros": [
+            {
+                "Nombre": "Jonathan",
+                "Apellido": "Savelski",
+                "Dni": 41920181,
+                "FechaNacimiento": "2000-11-13T00:00:00",
+                "TipoDeProducto": "Hotel",
+                "CodigoProducto": "PRS-Especial-1",
+                "Edad": 23
+            },
+            {
+                "Nombre": "Pedro",
+                "Apellido": "Sanchez",
+                "Dni": 43920181,
+                "FechaNacimiento": "2000-11-13T00:00:00",
+                "TipoDeProducto": "Hotel",
+                "CodigoProducto": "PRS-Especial-1",
+                "Edad": 23
+            }
+        ],
+        "Cotizacion": 900,
+        "Estado": "Pre-reserva",
+        "Pago": false
+    },
+    {
+        "NumeroItinerario": "61091092",
+        "FechaCreacionItinerario": "2023-11-13T23:34:15.7385246-03:00",
+        "CodigosVuelosAgregados": [],
+        "CodigosHotelesAgregados": [
+            "PRS-Especial-1",
+            "PRS-Especial-1"
+        ],
+        "Pasajeros": [
+            {
+                "Nombre": "Bian",
+                "Apellido": "Lo",
+                "Dni": 33333333,
+                "FechaNacimiento": "2000-11-14T00:00:00",
+                "TipoDeProducto": "Hotel",
+                "CodigoProducto": "PRS-Especial-1",
+                "Edad": 23
+            },
+            {
+                "Nombre": "A",
+                "Apellido": "B",
+                "Dni": 33333333,
+                "FechaNacimiento": "2000-11-14T00:00:00",
+                "TipoDeProducto": "Hotel",
+                "CodigoProducto": "PRS-Especial-1",
+                "Edad": 23
+            }
+        ],
+        "Cotizacion": 240,
+        "Estado": "Guardado",
+        "Pago": false
+    },
+    {
+        "NumeroItinerario": "44757843",
+        "FechaCreacionItinerario": "2023-11-15T20:21:09.8069869-03:00",
+        "CodigosVuelosAgregados": [
+            "121-EZE062023-1"
+        ],
+        "CodigosHotelesAgregados": [],
+        "Pasajeros": [
+            {
+                "Nombre": "Bianca",
+                "Apellido": "Lopre",
+                "Dni": 40889097,
+                "FechaNacimiento": "2002-11-15T00:00:00",
+                "TipoDeProducto": "Vuelo",
+                "CodigoProducto": "121-EZE062023-1",
+                "Edad": 21
+            }
+        ],
+        "Cotizacion": 400,
+        "Estado": "Guardado",
+        "Pago": false
+    },
+    {
+        "NumeroItinerario": "51621821",
+        "FechaCreacionItinerario": "2023-11-16T20:40:05.5728957-03:00",
+        "CodigosVuelosAgregados": [],
+        "CodigosHotelesAgregados": [
+            "PRS-Especial-1"
+        ],
+        "Pasajeros": [
+            {
+                "Nombre": "Jonathan",
+                "Apellido": "Savelski",
+                "Dni": 43920181,
+                "FechaNacimiento": "2002-03-05T00:00:00",
+                "TipoDeProducto": "Hotel",
+                "CodigoProducto": "PRS-Especial-1",
+                "Edad": 21
+            }
+        ],
+        "Cotizacion": 120,
+        "Estado": "Reserva",
+        "Pago": true
+    }
+]
